@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Game</title>
+    <style>
+        /* Basic styling for the spin interface */
+        .spin-wheel {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(orange, yellow, green, cyan, blue, magenta, red, orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spin the Wheel!</h1>
+    <div class="spin-wheel" onclick="spinWheel()">Spin!</div>
+    <div id="result"></div>
+
+    <script>
+        async function spinWheel() {
+            const bet = 10;  // Replace this with user's bet
+            const response = await fetch('/spin', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({bet})
+            });
+            const data = await response.json();
+            const resultDiv = document.getElementById('result');
+            if (data.outcome === 'win') {
+                resultDiv.innerHTML = `🎉 You won ${data.winnings} coins!`;
+            } else {
+                resultDiv.innerHTML = `😢 You lost. Better luck next time!`;
+            }
+        }
+    </script>
+</body>
+</html>
