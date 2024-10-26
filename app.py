@@ -6,6 +6,22 @@ import os
 # Flask app setup
 app = Flask(__name__)
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/spin_game')
+def spin_game():
+    return render_template('spin_game.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 # Replace with your actual web app URL
 WEB_APP_URL = "https://winz.onrender.com"  # e.g., your hosted spin game
 
