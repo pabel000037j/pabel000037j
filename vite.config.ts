@@ -1,21 +1,10 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react()],
-  base: '/tgmini/',
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: false,
     rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
+      input: './index.html', // This should point to your HTML file in the root directory
     },
-  },
-  server: {
-    port: 3000,
-    host: true,
+    assetsDir: 'assets', // Ensure assets are placed in the 'assets' folder
   },
 });
