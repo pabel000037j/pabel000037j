@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wheel } from './components/Wheel';
 import { Controls } from './components/Controls';
 import { History } from './components/History';
 import { Stats } from './components/Stats';
 import { TransactionButtons } from './components/TransactionButtons';
-import { useTelegramWebApp } from './hooks/useTelegramWebApp';
-import { useGameInitialization } from './hooks/useGameInitialization';
 
 export default function App() {
-  const { isReady, colorScheme } = useTelegramWebApp();
-  useGameInitialization();
+  const [isReady, setIsReady] = useState(false);
+  const [colorScheme, setColorScheme] = useState('light');
+
+  // Initialize Telegram Web App
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      // Wait until Telegram Web App SDK is ready
+      window.Telegram.WebApp.ready();
+
+      // Set app readiness state to true
+      setIsReady(true);
+
+      // Set the color scheme based on Telegram's settings
+      window.Telegram.WebApp.onEvent('themeChanged', (theme: string) => {
+        setColorScheme(theme);
+      });
+    } else {
+      console.error('Telegram Web App SDK is not loaded.');
+    }
+  }, []);
 
   if (!isReady) {
     return (
