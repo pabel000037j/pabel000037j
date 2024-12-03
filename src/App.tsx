@@ -9,16 +9,11 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [colorScheme, setColorScheme] = useState('light');
 
-  // Initialize Telegram Web App
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
-      // Wait until Telegram Web App SDK is ready
       window.Telegram.WebApp.ready();
-
-      // Set app readiness state to true
       setIsReady(true);
-
-      // Set the color scheme based on Telegram's settings
+      
       window.Telegram.WebApp.onEvent('themeChanged', (theme: string) => {
         setColorScheme(theme);
       });
