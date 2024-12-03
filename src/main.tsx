@@ -37,4 +37,5 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', waitForTelegramWebApp);
 } else {
   waitForTelegramWebApp();
+  
 }
