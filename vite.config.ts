@@ -1,10 +1,21 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  plugins: [react()],
+  base: './',
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
     rollupOptions: {
-      input: './index.html', // This should point to your HTML file in the root directory
+      output: {
+        manualChunks: undefined,
+      },
     },
-    assetsDir: 'assets', // Ensure assets are placed in the 'assets' folder
+  },
+  server: {
+    port: 3000,
+    host: true,
   },
 });
