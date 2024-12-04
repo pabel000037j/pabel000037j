@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wheel } from './components/Wheel';
 import { Controls } from './components/Controls';
 import { History } from './components/History';
 import { Stats } from './components/Stats';
 import { TransactionButtons } from './components/TransactionButtons';
-import { useTelegramWebApp } from './hooks/useTelegramWebApp';
-import { useGameInitialization } from './hooks/useGameInitialization';
 
 export default function App() {
-  const { isReady, colorScheme } = useTelegramWebApp();
-  useGameInitialization();
+  const [isReady, setIsReady] = useState(false);
+  const [colorScheme, setColorScheme] = useState('light');
+
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      setIsReady(true);
+      
+      window.Telegram.WebApp.onEvent('themeChanged', (theme: string) => {
+        setColorScheme(theme);
+      });
+    } else {
+      console.error('Telegram Web App SDK is not loaded.');
+    }
+  }, []);
 
   if (!isReady) {
     return (
