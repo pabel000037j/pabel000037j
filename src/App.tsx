@@ -4,7 +4,6 @@ import { Controls } from './components/Controls';
 import { History } from './components/History';
 import { Stats } from './components/Stats';
 import { TransactionButtons } from './components/TransactionButtons';
-import { InviteButton } from './components/InviteButton';
 import { useTelegramWebApp } from './hooks/useTelegramWebApp';
 import { useGameInitialization } from './hooks/useGameInitialization';
 
@@ -36,7 +35,6 @@ export default function App() {
       <TransactionButtons />
       <History />
       <Stats />
-      <InviteButton />
     </div>
   );
 }
