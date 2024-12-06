@@ -6,7 +6,7 @@ export interface SpinResult {
 }
 
 export function calculateTargetRotation(currentRotation: number, targetSegment: number): SpinResult {
-  const segmentAngle = (Math.PI * 2) / WHEEL_SEGMENTS.length;
+  const segmentAngle = (Math.PI / 4 ) / WHEEL_SEGMENTS.length;
   const baseRotations = 4; // Number of full rotations
   
   // Calculate the exact angle needed to land on the target segment
